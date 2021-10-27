@@ -1,0 +1,31 @@
+.variants {
+    grid-area        : variants;
+    display          : flex;
+    align-items      : center;
+    justify-content  : flex-start;
+    box-sizing       : border-box;
+    gap              : 1rem;
+    margin-block-end : -.5rem;
+}
+
+.variants-btn {
+    inline-size      : 1.5rem;
+    block-size       : .5rem;
+    border-radius    : 4px/4px;
+    overflow         : hidden;
+    background-color : var(--secondary);
+    filter           : drop-shadow(.1rem .1rem 0 var(--black));
+}
+
+.is-bigBtn {
+    inline-size       : 2rem;
+    block-size        : 2rem;
+    box-sizing        : border-box;
+    border-radius     : 50%;
+    margin-inline-end : 1rem;
+}
+
+.is-yellowBtn {
+    background-color : #FECB2F;
+    filter           : drop-shadow(.1rem .1rem 0 #D2AB33);
+}

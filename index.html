@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="./css/index.css" rel="stylesheet">
+    <title>Pokedex</title>
+</head>
+<body>
+    <main class="pokedex is-open" tabindex="0">
+        <section aria-label="Información general del Pokémon" class="pokedex-main">
+            <div class="header-shadow">
+                <div class="header">
+                    <span class="light is-big is-sky"></span>
+                    <span class="light is-red"></span>
+                    <span class="light is-yellow"></span>
+                    <span class="light is-green"></span>
+                </div>
+            </div>
+            <div class="screen">
+                <div class="screen-border">
+                    <div class="screen-safeArea">
+                        <img alt="" id="image" src="">
+                    </div>
+                    <div class="buttons-border">
+            <span class="border-btn">
+            
+            </span>
+                        <span class="border-btn">
+            
+            </span>
+                        <span class="border-btn lines">
+              
+            </span>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="variants">
+          <span class="variants-btn is-bigBtn">
+          
+          </span>
+                    <span class="variants-btn is-yellowBtn">
+          
+          </span>
+                    <span class="variants-btn">
+          
+          </span>
+                </div>
+                <form class="search" id="form" role="search">
+                    <input autocomplete="off" name="id" placeholder="¿Quién es ese Pokémon?" type="text">
+                </form>
+                <div class="description">
+                    <p id="description">Busca a un Pokémon para conocer todas sus características.</p>
+                </div>
+                <div class="navigation">
+                    <button aria-label="Siguiente Pokémon" class="navigation-right" id="next-pokemon"></button>
+                    <button aria-label="Pokémon Anterior" class="navigation-left" id="prev-pokemon"></button>
+                    <button aria-label="Siguiente Imagen" class="navigation-down" id="next-image"></button>
+                    <button aria-label="Imagen Anterior" class="navigation-up" id="prev-image"></button>
+                </div>
+            </div>
+        </section>
+        <div class="cover-front">
+            Cover Front
+        </div>
+        <section aria-label="Estadísticas del Pokémon" class="cover-back">
+            <div class="stats">
+                Stats
+            </div>
+        </section>
+    </main>
+    <script src="./js/index.js" type="module"></script>
+</body>
+</html>
+
+
+

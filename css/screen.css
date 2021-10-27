@@ -1,0 +1,50 @@
+.screen {
+
+}
+
+.screen-border {
+    padding           : 1.5rem;
+    padding-block-end : 2.75rem;
+    border-radius     : .5rem;
+    background-color  : var(--white);
+    clip-path         : polygon(0 0, 100% 0, 100% 100%, 2rem 100%, 0 calc(100% - 2.75rem));
+}
+
+.buttons-border {
+    display         : flex;
+    align-items     : center;
+    justify-content : flex-end;
+    gap             : 1rem;
+}
+
+.border-btn {
+    background-color   : var(--primary);
+    inline-size        : 1rem;
+    block-size         : 1rem;
+    border-radius      : 50%;
+    overflow           : hidden;
+    margin-block-start : 1rem;
+    margin-block-end   : -1rem;
+    box-sizing         : border-box;
+}
+
+.lines {
+    border-radius       : 0;
+    margin-inline-start : 5rem;
+    inline-size         : 1.5rem;
+    background-color    : transparent;
+    background-image    : url("../icons/lines.png");
+    background-size     : 100% 100%;
+}
+
+.screen-safeArea {
+    padding          : 1rem;
+    background-color : #8DB9DC;
+    border-radius    : .25rem;
+    display          : flex;
+    justify-content  : center;
+    align-items      : center;
+    block-size       : 10rem;
+    box-sizing       : border-box;
+    background-size  : cover;
+}
