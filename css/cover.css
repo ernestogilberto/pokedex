@@ -6,7 +6,6 @@
     inline-size: inherit;
     block-size: inherit;
     background-color: var(--primary);
-    /*background-color : green;*/
     position: absolute;
     inset: 0;
     z-index: 2;
@@ -25,7 +24,6 @@
     inline-size: inherit;
     block-size: inherit;
     background-color: var(--primary);
-    /*background-color : blue;*/
 
     position: absolute;
     inset: 0;
@@ -44,4 +42,6 @@
 
     clip-path: polygon(0 3.25rem, 30% 3.25rem, 100% 4.75rem, 100% 100%, 0 100%);
     display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }

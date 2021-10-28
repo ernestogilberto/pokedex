@@ -8,8 +8,12 @@ const $light = document.querySelector('#light')
 function speech(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'es'
+    speechSynthesis.speaking ? speechSynthesis.cancel() : null
     speechSynthesis.speak(utterance);
-    $light.classList.add('is-animated')
+
+    utterance.addEventListener
+    ('start', () => {     $light.classList.add('is-animated')
+    })
 
     utterance.addEventListener
    ('end', () => {     $light.classList.remove('is-animated')
@@ -43,8 +47,6 @@ export async function findPokemon(id) {
             sprites.push(pokemon.sprites[spritesKey])
         }
     }
-
-    console.log(sprites)
 
     return {
         id: pokemon.id,

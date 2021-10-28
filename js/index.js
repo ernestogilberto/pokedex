@@ -6,12 +6,14 @@ const $prev = document.querySelector('#prev-pokemon')
 const $pokedex = document.querySelector('#pokedex')
 const $nextImg = document.querySelector('#next-image')
 const $prevImg = document.querySelector('#prev-image')
+const $random = document.querySelector('#random')
 
 $form.addEventListener('submit', showPokemon)
 $next.addEventListener('click', showNextPokemon)
 $prev.addEventListener('click', showPrevPokemon)
 $nextImg.addEventListener('click', showNextImage)
 $prevImg.addEventListener('click', showPrevImage)
+$random.addEventListener('click', showRandomPokemon)
 
 let currentPokemon = null
 let currentImage = null
@@ -20,7 +22,7 @@ async function showPokemon(event) {
     $pokedex.classList.add('is-open')
     event.preventDefault()
     const form = new FormData($form)
-    const id = form.get('id')
+    const id = form.get('id').toLowerCase()
 
     currentPokemon = await setPokemon(id)
     currentImage = 0
@@ -53,4 +55,10 @@ async function showPrevImage() {
         currentImage = id
         setImage(currentPokemon.sprites[id])
     }
+}
+
+async function showRandomPokemon() {
+    const id = Math.floor(Math.random() * 893) + 1
+    currentPokemon = await setPokemon(id)
+    $form.querySelector('input[name="id"]').value = id
 }
