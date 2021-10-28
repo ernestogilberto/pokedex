@@ -7,6 +7,7 @@ const $pokedex = document.querySelector('#pokedex')
 const $nextImg = document.querySelector('#next-image')
 const $prevImg = document.querySelector('#prev-image')
 const $random = document.querySelector('#random')
+const $lang = document.querySelector('#lang')
 
 $form.addEventListener('submit', showPokemon)
 $next.addEventListener('click', showNextPokemon)
@@ -14,9 +15,11 @@ $prev.addEventListener('click', showPrevPokemon)
 $nextImg.addEventListener('click', showNextImage)
 $prevImg.addEventListener('click', showPrevImage)
 $random.addEventListener('click', showRandomPokemon)
+$lang.addEventListener('click', changeLanguage)
 
 let currentPokemon = null
 let currentImage = null
+let currentLanguage = 'es'
 
 async function showPokemon(event) {
     $pokedex.classList.add('is-open')
@@ -24,19 +27,19 @@ async function showPokemon(event) {
     const form = new FormData($form)
     const id = form.get('id').toLowerCase()
 
-    currentPokemon = await setPokemon(id)
+    currentPokemon = await setPokemon(id, currentLanguage)
     currentImage = 0
 }
 
 async function showNextPokemon() {
     const id = currentPokemon && currentPokemon.id < 893 ? currentPokemon.id + 1 : 1
-    currentPokemon = await setPokemon(id)
+    currentPokemon = await setPokemon(id, currentLanguage)
     $form.querySelector('input[name="id"]').value = id
 }
 
 async function showPrevPokemon() {
     const id = currentPokemon && currentPokemon.id > 1 ? currentPokemon.id - 1 : 893
-    currentPokemon = await setPokemon(id)
+    currentPokemon = await setPokemon(id, currentLanguage)
     $form.querySelector('input[name="id"]').value = id
 }
 
@@ -59,6 +62,10 @@ async function showPrevImage() {
 
 async function showRandomPokemon() {
     const id = Math.floor(Math.random() * 893) + 1
-    currentPokemon = await setPokemon(id)
+    currentPokemon = await setPokemon(id, currentLanguage)
     $form.querySelector('input[name="id"]').value = id
+}
+
+async function changeLanguage() {
+    currentLanguage === 'es' ? currentLanguage = 'en' : currentLanguage = 'es'
 }
