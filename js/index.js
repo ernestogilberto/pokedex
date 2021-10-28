@@ -38,12 +38,14 @@ function close (){
 }
 
 async function showNextPokemon() {
+    $pokedex.classList.add('is-open')
     const id = currentPokemon && currentPokemon.id < 893 ? currentPokemon.id + 1 : 1
     currentPokemon = await setPokemon(id, currentLanguage)
     $form.querySelector('input[name="id"]').value = id
 }
 
 async function showPrevPokemon() {
+    $pokedex.classList.add('is-open')
     const id = currentPokemon && currentPokemon.id > 1 ? currentPokemon.id - 1 : 893
     currentPokemon = await setPokemon(id, currentLanguage)
     $form.querySelector('input[name="id"]').value = id
@@ -57,7 +59,6 @@ async function showNextImage() {
     }
 }
 
-
 async function showPrevImage() {
     if(currentPokemon){
         const id = currentImage > 0 ? --currentImage : currentPokemon.sprites.length-1
@@ -67,12 +68,14 @@ async function showPrevImage() {
 }
 
 async function showRandomPokemon() {
+    $pokedex.classList.add('is-open')
     const id = Math.floor(Math.random() * 893) + 1
     currentPokemon = await setPokemon(id, currentLanguage)
     $form.querySelector('input[name="id"]').value = id
 }
 
 async function showCardPokemon(id) {
+    $pokedex.classList.add('is-open')
     currentPokemon = await setPokemon(id, currentLanguage)
     $form.querySelector('input[name="id"]').value = id
 }

@@ -51,6 +51,9 @@ function setInfo(pokemon){
             <p>${move}</p>
         `
     })
+
+    $info.classList.add('active')
+
 }
 
 
@@ -60,24 +63,24 @@ export async function findPokemon(id, lang) {
     console.log(lang)
     const description = species.flavor_text_entries.find(entry => entry.language.name === lang).flavor_text
     const sprites = [pokemon.sprites.front_default]
-    const types = [pokemon.types[0].type.name]
-    const moves = [pokemon.moves[0].move.name]
+    const types = []
+    const moves = []
 
     for (const spritesKey in pokemon.sprites){
         if(spritesKey !== 'front_default' && pokemon.sprites[spritesKey] && spritesKey !== 'other' && spritesKey !== 'versions'){
             sprites.push(pokemon.sprites[spritesKey])
         }
     }
-    if(pokemon.types.length > 1){
+    if(pokemon.types.length > 0){
 
-        for(let i = 1; i < pokemon.types.length; i++){
+        for(let i = 0; i < pokemon.types.length; i++){
             types.push(pokemon.types[i].type.name)
         }
     }
 
-    if(pokemon.moves.length > 1){
+    if(pokemon.moves.length > 0){
 
-        for(let i = 1; i < pokemon.moves.length; i++){
+        for(let i = 0; i < pokemon.moves.length; i++){
             moves.push(pokemon.moves[i].move.name)
         }
     }
