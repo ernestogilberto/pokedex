@@ -3,10 +3,14 @@
     padding          : 1rem;
     border-radius    : .5rem;
     flex-grow        : 1;
-    overflow: auto;
-    font-size: 1rem;
+    overflow         : auto;
+    font-size        : 1rem;
 }
 
-.stats.active{
-    height: 400rem;
+.stats img {
+    height : 1.5rem;
+}
+
+.stats.active {
+    height : 400rem;
 }

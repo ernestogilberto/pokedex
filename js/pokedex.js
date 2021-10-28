@@ -13,11 +13,13 @@ function speech(text, lang) {
     speechSynthesis.speak(utterance);
 
     utterance.addEventListener
-    ('start', () => {     $light.classList.add('is-animated')
+    ('start', () => {
+        $light.classList.add('is-animated')
     })
 
     utterance.addEventListener
-   ('end', () => {     $light.classList.remove('is-animated')
+    ('end', () => {
+        $light.classList.remove('is-animated')
     })
 }
 
@@ -25,7 +27,7 @@ export function setImage(url) {
     $image.src = url
 }
 
-function setDescription(name, description){
+function setDescription(name, description) {
     $description.innerHTML = `
             <h1>${name}</h1>
             <p>${description}</p>`
@@ -37,11 +39,23 @@ function loader(isLoading = false) {
 }
 
 
-function setInfo(pokemon){
+function setInfo(pokemon) {
+
     $info.innerHTML = `
+        <h1>Tipo: </h1>
+    `
+
+    for (let i = 0; i < pokemon.types.length; i++) {
+
+        $info.innerHTML += `
+                <img src="./icons/types/${pokemon.types[i]}.svg" alt="${pokemon.name}">
+            `
+    }
+
+    $info.innerHTML += `
             <h1>Tamaño: </h1>
             <p>${pokemon.height}</p>
-            <h1>Peso: : </h1>
+            <h1>Peso: </h1>
             <p>${pokemon.weight}</p>
             <h1>Movimientos: </h1>
         `
@@ -60,27 +74,26 @@ function setInfo(pokemon){
 export async function findPokemon(id, lang) {
     const pokemon = await getPokemon(id)
     const species = await getSpecies(id)
-    console.log(lang)
     const description = species.flavor_text_entries.find(entry => entry.language.name === lang).flavor_text
     const sprites = [pokemon.sprites.front_default]
     const types = []
     const moves = []
 
-    for (const spritesKey in pokemon.sprites){
-        if(spritesKey !== 'front_default' && pokemon.sprites[spritesKey] && spritesKey !== 'other' && spritesKey !== 'versions'){
+    for (const spritesKey in pokemon.sprites) {
+        if (spritesKey !== 'front_default' && pokemon.sprites[spritesKey] && spritesKey !== 'other' && spritesKey !== 'versions') {
             sprites.push(pokemon.sprites[spritesKey])
         }
     }
-    if(pokemon.types.length > 0){
+    if (pokemon.types.length > 0) {
 
-        for(let i = 0; i < pokemon.types.length; i++){
+        for (let i = 0; i < pokemon.types.length; i++) {
             types.push(pokemon.types[i].type.name)
         }
     }
 
-    if(pokemon.moves.length > 0){
+    if (pokemon.moves.length > 0) {
 
-        for(let i = 0; i < pokemon.moves.length; i++){
+        for (let i = 0; i < pokemon.moves.length; i++) {
             moves.push(pokemon.moves[i].move.name)
         }
     }
@@ -97,9 +110,8 @@ export async function findPokemon(id, lang) {
     }
 }
 
-export async function setPokemon(id, lang){
+export async function setPokemon(id, lang) {
     loader(true)
-    console.log(lang)
     const pokemon = await findPokemon(id, lang)
     loader(false)
     setImage(pokemon.sprites[0])

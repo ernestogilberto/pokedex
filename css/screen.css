@@ -38,14 +38,14 @@
 }
 
 .screen-safeArea {
-    padding          : 1rem;
-    background-color : #8DB9DC;
-    border-radius    : .25rem;
-    display          : flex;
-    justify-content  : center;
-    align-items      : center;
-    block-size       : 10rem;
-    box-sizing       : border-box;
-    background-size  : cover;
-    background-position: center;
+    padding             : 1rem;
+    background-color    : #8DB9DC;
+    border-radius       : .25rem;
+    display             : flex;
+    justify-content     : center;
+    align-items         : center;
+    block-size          : 10rem;
+    box-sizing          : border-box;
+    background-size     : cover;
+    background-position : center;
 }

@@ -1,4 +1,4 @@
-import {setPokemon, setImage, findPokemon} from "./pokedex.js";
+import {findPokemon, setImage, setPokemon} from "./pokedex.js";
 
 const $form = document.querySelector('#form')
 const $next = document.querySelector('#next-pokemon')
@@ -33,7 +33,7 @@ async function showPokemon(event) {
     currentImage = 0
 }
 
-function close (){
+function close() {
     $pokedex.classList.remove('is-open')
 }
 
@@ -52,16 +52,16 @@ async function showPrevPokemon() {
 }
 
 async function showNextImage() {
-    if(currentPokemon){
-        const id = currentImage < currentPokemon.sprites.length-1 ? ++currentImage : 0
+    if (currentPokemon) {
+        const id = currentImage < currentPokemon.sprites.length - 1 ? ++currentImage : 0
         currentImage = id
         setImage(currentPokemon.sprites[id])
     }
 }
 
 async function showPrevImage() {
-    if(currentPokemon){
-        const id = currentImage > 0 ? --currentImage : currentPokemon.sprites.length-1
+    if (currentPokemon) {
+        const id = currentImage > 0 ? --currentImage : currentPokemon.sprites.length - 1
         currentImage = id
         setImage(currentPokemon.sprites[id])
     }
@@ -84,11 +84,11 @@ async function changeLanguage() {
     currentLanguage === 'es' ? currentLanguage = 'en' : currentLanguage = 'es'
 }
 
-async function displayCards (){
+async function displayCards() {
 
     const $cards = document.querySelector('.cards')
 
-    for(let i = 1; i <= 151; i++){
+    for (let i = 1; i <= 151; i++) {
         const card = document.createElement('article')
         card.classList.add('card')
         $cards.appendChild(card)
@@ -96,12 +96,12 @@ async function displayCards (){
         card.setAttribute('id', pokemon.id)
         card.onclick = () => showCardPokemon(pokemon.id)
         card.innerHTML = `
-            <h1>${pokemon.name}</h1> <img src="./icons/types/${pokemon.types[0]}.svg" alt="${pokemon.name}">
+            <h1>${pokemon.name}</h1> 
         `
-        if (pokemon.types.length > 1){
-            const type2 = pokemon.types[1] ? pokemon.types[1] : ''
+        for (let i = 0; i < pokemon.types.length; i++) {
+
             card.innerHTML += `
-                <img src="./icons/types/${type2}.svg" alt="${pokemon.name}">
+                <img src="./icons/types/${pokemon.types[i]}.svg" alt="${pokemon.name}">
             `
         }
     }
