@@ -2,6 +2,7 @@ import {getPokemon, getSpecies} from "./api.js";
 
 const $image = document.querySelector('#image')
 const $description = document.querySelector('#description')
+const $info = document.querySelector('#info')
 const $screen = document.querySelector('#screen')
 const $light = document.querySelector('#light')
 
@@ -35,6 +36,24 @@ function loader(isLoading = false) {
     $screen.style.backgroundImage = img
 }
 
+
+function setInfo(pokemon){
+    $info.innerHTML = `
+            <h1>Tamaño: </h1>
+            <p>${pokemon.height}</p>
+            <h1>Peso: : </h1>
+            <p>${pokemon.weight}</p>
+            <h1>Movimientos: </h1>
+        `
+
+    pokemon.moves.forEach(move => {
+        $info.innerHTML += `
+            <p>${move}</p>
+        `
+    })
+}
+
+
 export async function findPokemon(id, lang) {
     const pokemon = await getPokemon(id)
     const species = await getSpecies(id)
@@ -42,6 +61,7 @@ export async function findPokemon(id, lang) {
     const description = species.flavor_text_entries.find(entry => entry.language.name === lang).flavor_text
     const sprites = [pokemon.sprites.front_default]
     const types = [pokemon.types[0].type.name]
+    const moves = [pokemon.moves[0].move.name]
 
     for (const spritesKey in pokemon.sprites){
         if(spritesKey !== 'front_default' && pokemon.sprites[spritesKey] && spritesKey !== 'other' && spritesKey !== 'versions'){
@@ -55,12 +75,22 @@ export async function findPokemon(id, lang) {
         }
     }
 
+    if(pokemon.moves.length > 1){
+
+        for(let i = 1; i < pokemon.moves.length; i++){
+            moves.push(pokemon.moves[i].move.name)
+        }
+    }
+
     return {
         id: pokemon.id,
         name: pokemon.name,
+        height: pokemon.height,
+        weight: pokemon.weight,
         types,
         sprites,
-        description
+        description,
+        moves
     }
 }
 
@@ -71,6 +101,7 @@ export async function setPokemon(id, lang){
     loader(false)
     setImage(pokemon.sprites[0])
     setDescription(pokemon.name, pokemon.description)
+    setInfo(pokemon)
 
     speech(`${pokemon.name}. ${pokemon.description}`, lang)
     return pokemon

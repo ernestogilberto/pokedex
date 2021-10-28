@@ -8,6 +8,7 @@ const $nextImg = document.querySelector('#next-image')
 const $prevImg = document.querySelector('#prev-image')
 const $random = document.querySelector('#random')
 const $lang = document.querySelector('#lang')
+const $close = document.querySelector('#close')
 
 $form.addEventListener('submit', showPokemon)
 $next.addEventListener('click', showNextPokemon)
@@ -16,6 +17,7 @@ $nextImg.addEventListener('click', showNextImage)
 $prevImg.addEventListener('click', showPrevImage)
 $random.addEventListener('click', showRandomPokemon)
 $lang.addEventListener('click', changeLanguage)
+$close.addEventListener('click', close)
 
 let currentPokemon = null
 let currentImage = null
@@ -29,6 +31,10 @@ async function showPokemon(event) {
 
     currentPokemon = await setPokemon(id, currentLanguage)
     currentImage = 0
+}
+
+function close (){
+    $pokedex.classList.remove('is-open')
 }
 
 async function showNextPokemon() {
