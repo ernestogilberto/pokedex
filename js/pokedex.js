@@ -41,18 +41,24 @@ export async function findPokemon(id, lang) {
     console.log(lang)
     const description = species.flavor_text_entries.find(entry => entry.language.name === lang).flavor_text
     const sprites = [pokemon.sprites.front_default]
+    const types = [pokemon.types[0].type.name]
 
     for (const spritesKey in pokemon.sprites){
-
         if(spritesKey !== 'front_default' && pokemon.sprites[spritesKey] && spritesKey !== 'other' && spritesKey !== 'versions'){
             sprites.push(pokemon.sprites[spritesKey])
         }
     }
-    console.log(pokemon.types[0].type.name)
+    if(pokemon.types.length > 1){
+
+        for(let i = 1; i < pokemon.types.length; i++){
+            types.push(pokemon.types[i].type.name)
+        }
+    }
+
     return {
         id: pokemon.id,
         name: pokemon.name,
-        type: pokemon.types[0].type.name,
+        types,
         sprites,
         description
     }

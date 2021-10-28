@@ -87,8 +87,14 @@ async function displayCards (){
         card.setAttribute('id', pokemon.id)
         card.onclick = () => showCardPokemon(pokemon.id)
         card.innerHTML = `
-            <h1>${pokemon.name}</h1> <img src="./icons/types/${pokemon.type}.svg" alt="${pokemon.name}">
+            <h1>${pokemon.name}</h1> <img src="./icons/types/${pokemon.types[0]}.svg" alt="${pokemon.name}">
         `
+        if (pokemon.types.length > 1){
+            const type2 = pokemon.types[1] ? pokemon.types[1] : ''
+            card.innerHTML += `
+                <img src="./icons/types/${type2}.svg" alt="${pokemon.name}">
+            `
+        }
     }
 }
 
