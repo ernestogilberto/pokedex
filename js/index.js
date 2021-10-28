@@ -1,4 +1,4 @@
-import {setPokemon, setImage} from "./pokedex.js";
+import {setPokemon, setImage, findPokemon} from "./pokedex.js";
 
 const $form = document.querySelector('#form')
 const $next = document.querySelector('#next-pokemon')
@@ -66,6 +66,30 @@ async function showRandomPokemon() {
     $form.querySelector('input[name="id"]').value = id
 }
 
+async function showCardPokemon(id) {
+    currentPokemon = await setPokemon(id, currentLanguage)
+    $form.querySelector('input[name="id"]').value = id
+}
+
 async function changeLanguage() {
     currentLanguage === 'es' ? currentLanguage = 'en' : currentLanguage = 'es'
 }
+
+async function displayCards (){
+
+    const $cards = document.querySelector('.cards')
+
+    for(let i = 1; i <= 151; i++){
+        const card = document.createElement('article')
+        card.classList.add('card')
+        $cards.appendChild(card)
+        const pokemon = await findPokemon(i, currentLanguage)
+        card.setAttribute('id', pokemon.id)
+        card.onclick = () => showCardPokemon(pokemon.id)
+        card.innerHTML = `
+            <h1>${pokemon.name}</h1> <img src="./icons/types/${pokemon.type}.svg" alt="${pokemon.name}">
+        `
+    }
+}
+
+displayCards()

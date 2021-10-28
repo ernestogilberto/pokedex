@@ -48,10 +48,11 @@ export async function findPokemon(id, lang) {
             sprites.push(pokemon.sprites[spritesKey])
         }
     }
-
+    console.log(pokemon.types[0].type.name)
     return {
         id: pokemon.id,
         name: pokemon.name,
+        type: pokemon.types[0].type.name,
         sprites,
         description
     }
@@ -66,6 +67,5 @@ export async function setPokemon(id, lang){
     setDescription(pokemon.name, pokemon.description)
 
     speech(`${pokemon.name}. ${pokemon.description}`, lang)
-
     return pokemon
 }

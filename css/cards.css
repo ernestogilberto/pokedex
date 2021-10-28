@@ -1,0 +1,25 @@
+.cards {
+    background-color : var(--secondary);
+    padding          : 1rem;
+    border-radius    : .5rem;
+    flex-grow        : 1;
+    overflow : auto;
+}
+
+.card{
+    background-color: lightyellow;
+    height: 1.2rem;
+    color: black;
+    padding-block: .5rem;
+    padding-inline: 2rem;
+    display: flex;
+    border-radius    : .5rem/.5rem;
+    justify-content: space-between;
+    align-items: center;
+    font-size : 1rem;
+    margin-block-end: .5rem;
+    cursor: pointer;
+}
+.card img{
+    height: 1.5rem;
+}

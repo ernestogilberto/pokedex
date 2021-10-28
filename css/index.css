@@ -9,6 +9,7 @@
 @import "./search.css";
 @import "./description.css";
 @import "./navigation.css";
+@import "./cards.css";
 
 :root {
     --white         : #FFFFFE;
