@@ -1,5 +1,5 @@
 .screen {
-
+    background-size: cover;
 }
 
 .screen-border {
@@ -46,6 +46,7 @@
     align-items         : center;
     block-size          : 10rem;
     box-sizing          : border-box;
-    background-size     : cover;
+    background-size     : contain;
+    background-repeat: no-repeat;
     background-position : center;
 }

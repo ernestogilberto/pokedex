@@ -5,6 +5,7 @@ const $description = document.querySelector('#description')
 const $info = document.querySelector('#info')
 const $screen = document.querySelector('#screen')
 const $light = document.querySelector('#light')
+const $safe = document.querySelector('.screen-safeArea')
 
 function speech(text, lang) {
     const utterance = new SpeechSynthesisUtterance(text);
@@ -25,6 +26,7 @@ function speech(text, lang) {
 
 export function setImage(url) {
     $image.src = url
+    $image.style.display = 'block'
 }
 
 function setDescription(name, description) {
@@ -34,8 +36,9 @@ function setDescription(name, description) {
 }
 
 function loader(isLoading = false) {
-    const img = isLoading ? 'url(../icons/loading.gif)' : ''
-    $screen.style.backgroundImage = img
+    $image.style.display = 'none'
+    $screen.style.backgroundImage = isLoading ? 'url(../icons/loading.gif)' : ''
+    $screen.style.backgroundSize = 'cover'
 }
 
 
@@ -67,6 +70,8 @@ function setInfo(pokemon) {
     })
 
     $info.classList.add('active')
+    $safe.style.backgroundImage = `url(./images/backgrounds/${pokemon.types[0]}.svg)`
+    $safe.style.backgroundSize = 'contain'
 
 }
 
