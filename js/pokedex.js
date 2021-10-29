@@ -37,18 +37,13 @@ export async function findPokemon(id, lang) {
             sprites.push(pokemon.sprites[spritesKey])
         }
     }
-    if (pokemon.types.length > 0) {
+    pokemon.types.forEach(type => {
+        types.push(type.type.name)
+    })
 
-        for (let i = 0; i < pokemon.types.length; i++) {
-            types.push(pokemon.types[i].type.name)
-        }
-    }
-
-    if (pokemon.moves.length > 0) {
-        for (let i = 0; i < pokemon.moves.length; i++) {
-            moves.push(pokemon.moves[i].move.name)
-        }
-    }
+    pokemon.moves.forEach(move => {
+        moves.push(move.move.name)
+    })
 
     return {
         id: pokemon.id,
