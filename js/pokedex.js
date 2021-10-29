@@ -13,15 +13,13 @@ function speech(text, lang) {
     speechSynthesis.speaking ? speechSynthesis.cancel() : null
     speechSynthesis.speak(utterance);
 
-    utterance.addEventListener
-    ('start', () => {
+    utterance.onstart = () => {
         $light.classList.add('is-animated')
-    })
+    }
 
-    utterance.addEventListener
-    ('end', () => {
+    utterance.onend = () => {
         $light.classList.remove('is-animated')
-    })
+    }
 }
 
 export async function findPokemon(id, lang) {
@@ -97,7 +95,7 @@ function setInfo(pokemon) {
 
     pokemon.moves.forEach(move => {
         $info.innerHTML += `
-            <p>${move}</p>
+            <p>${move} - </p>
         `
     })
 

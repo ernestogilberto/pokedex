@@ -90,19 +90,19 @@ async function displayCards() {
     const $cards = document.querySelector('.cards')
 
     for (let i = 1; i <= 151; i++) {
-        const card = document.createElement('article')
-        card.classList.add('card')
-        $cards.appendChild(card)
+        const $card = document.createElement('article')
+        $card.classList.add('card')
+        $cards.appendChild($card)
 
         const pokemon = await findPokemon(i, currentLanguage)
-        card.setAttribute('id', pokemon.id)
-        card.onclick = () => showCardPokemon(pokemon.id)
-        card.innerHTML = `
+        $card.setAttribute('id', pokemon.id)
+        $card.onclick = () => showCardPokemon(pokemon.id)
+        $card.innerHTML = `
             <h1>${pokemon.name}</h1> 
         `
         for (let i = 0; i < pokemon.types.length; i++) {
 
-            card.innerHTML += `
+            $card.innerHTML += `
                 <img src="./icons/types/${pokemon.types[i]}.svg" alt="${pokemon.name}">
             `
         }

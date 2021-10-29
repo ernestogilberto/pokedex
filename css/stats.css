@@ -14,3 +14,7 @@
 .stats.active {
     height : 400rem;
 }
+
+.stats p {
+    display : inline-block;
+}
