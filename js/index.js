@@ -10,14 +10,15 @@ const $random = document.querySelector('#random')
 const $lang = document.querySelector('#lang')
 const $close = document.querySelector('#close')
 
-$form.addEventListener('submit', showPokemon)
-$next.addEventListener('click', showNextPokemon)
-$prev.addEventListener('click', showPrevPokemon)
-$nextImg.addEventListener('click', showNextImage)
-$prevImg.addEventListener('click', showPrevImage)
-$random.addEventListener('click', showRandomPokemon)
-$lang.addEventListener('click', changeLanguage)
-$close.addEventListener('click', close)
+
+$form.onsubmit = showPokemon
+$next.onclick = showNextPokemon
+$prev.onclick = showPrevPokemon
+$nextImg.onclick = showNextImage
+$prevImg.onclick = showPrevImage
+$random.onclick = showRandomPokemon
+$lang.onclick = changeLanguage
+$close.onclick = close
 
 let currentPokemon = null
 let currentImage = null
@@ -51,7 +52,7 @@ async function showPrevPokemon() {
     $form.querySelector('input[name="id"]').value = id
 }
 
-async function showNextImage() {
+function showNextImage() {
     if (currentPokemon) {
         const id = currentImage < currentPokemon.sprites.length - 1 ? ++currentImage : 0
         currentImage = id
@@ -59,7 +60,7 @@ async function showNextImage() {
     }
 }
 
-async function showPrevImage() {
+function showPrevImage() {
     if (currentPokemon) {
         const id = currentImage > 0 ? --currentImage : currentPokemon.sprites.length - 1
         currentImage = id
@@ -80,7 +81,7 @@ async function showCardPokemon(id) {
     $form.querySelector('input[name="id"]').value = id
 }
 
-async function changeLanguage() {
+function changeLanguage() {
     currentLanguage === 'es' ? currentLanguage = 'en' : currentLanguage = 'es'
 }
 
@@ -92,6 +93,7 @@ async function displayCards() {
         const card = document.createElement('article')
         card.classList.add('card')
         $cards.appendChild(card)
+
         const pokemon = await findPokemon(i, currentLanguage)
         card.setAttribute('id', pokemon.id)
         card.onclick = () => showCardPokemon(pokemon.id)

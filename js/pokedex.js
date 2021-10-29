@@ -24,6 +24,44 @@ function speech(text, lang) {
     })
 }
 
+export async function findPokemon(id, lang) {
+    const pokemon = await getPokemon(id)
+    const species = await getSpecies(id)
+    const description = species.flavor_text_entries.find(entry => entry.language.name === lang).flavor_text
+    const sprites = [pokemon.sprites.front_default]
+    const types = []
+    const moves = []
+
+    for (const spritesKey in pokemon.sprites) {
+        if (spritesKey !== 'front_default' && pokemon.sprites[spritesKey] && spritesKey !== 'other' && spritesKey !== 'versions') {
+            sprites.push(pokemon.sprites[spritesKey])
+        }
+    }
+    if (pokemon.types.length > 0) {
+
+        for (let i = 0; i < pokemon.types.length; i++) {
+            types.push(pokemon.types[i].type.name)
+        }
+    }
+
+    if (pokemon.moves.length > 0) {
+        for (let i = 0; i < pokemon.moves.length; i++) {
+            moves.push(pokemon.moves[i].move.name)
+        }
+    }
+
+    return {
+        id: pokemon.id,
+        name: pokemon.name,
+        height: pokemon.height,
+        weight: pokemon.weight,
+        types,
+        sprites,
+        description,
+        moves
+    }
+}
+
 export function setImage(url) {
     $image.src = url
     $image.style.display = 'block'
@@ -40,7 +78,6 @@ function loader(isLoading = false) {
     $screen.style.backgroundImage = isLoading ? 'url(../icons/loading.gif)' : ''
     $screen.style.backgroundSize = 'cover'
 }
-
 
 function setInfo(pokemon) {
 
@@ -70,49 +107,11 @@ function setInfo(pokemon) {
     })
 
     $info.classList.add('active')
-    $safe.style.backgroundImage = `url(./images/backgrounds/${pokemon.types[0]}.svg)`
-    $safe.style.backgroundSize = 'contain'
-
 }
 
-
-export async function findPokemon(id, lang) {
-    const pokemon = await getPokemon(id)
-    const species = await getSpecies(id)
-    const description = species.flavor_text_entries.find(entry => entry.language.name === lang).flavor_text
-    const sprites = [pokemon.sprites.front_default]
-    const types = []
-    const moves = []
-
-    for (const spritesKey in pokemon.sprites) {
-        if (spritesKey !== 'front_default' && pokemon.sprites[spritesKey] && spritesKey !== 'other' && spritesKey !== 'versions') {
-            sprites.push(pokemon.sprites[spritesKey])
-        }
-    }
-    if (pokemon.types.length > 0) {
-
-        for (let i = 0; i < pokemon.types.length; i++) {
-            types.push(pokemon.types[i].type.name)
-        }
-    }
-
-    if (pokemon.moves.length > 0) {
-
-        for (let i = 0; i < pokemon.moves.length; i++) {
-            moves.push(pokemon.moves[i].move.name)
-        }
-    }
-
-    return {
-        id: pokemon.id,
-        name: pokemon.name,
-        height: pokemon.height,
-        weight: pokemon.weight,
-        types,
-        sprites,
-        description,
-        moves
-    }
+function setBackground(type) {
+    $safe.style.backgroundImage = `url(./images/backgrounds/${type}.svg)`
+    $safe.style.backgroundSize = 'contain'
 }
 
 export async function setPokemon(id, lang) {
@@ -122,6 +121,7 @@ export async function setPokemon(id, lang) {
     setImage(pokemon.sprites[0])
     setDescription(pokemon.name, pokemon.description)
     setInfo(pokemon)
+    setBackground(pokemon.types[0])
 
     speech(`${pokemon.name}. ${pokemon.description}`, lang)
     return pokemon
